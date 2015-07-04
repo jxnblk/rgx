@@ -3,6 +3,7 @@ import React from 'react'
 import { Grid, Cell } from '..'
 import { Header, Footer } from 'blk'
 import GridDemo from './GridDemo.jsx'
+import TypographyDemo from './TypographyDemo.jsx'
 import Box from './Box.jsx'
 import Section from './Section.jsx'
 import Controls from './Controls.jsx'
@@ -63,9 +64,9 @@ class App extends React.Component {
         <Header {...this.props} />
         <Social />
         <Section>
-          <h2>
+          <h4>
             <Scale scale={scale} />
-          </h2>
+          </h4>
           {g1.map(function(grid, i) {
             return (
               <GridDemo key={i}
@@ -75,14 +76,19 @@ class App extends React.Component {
           })}
         </Section>
         <Section>
-          {g2.map(function(grid, i) {
-            return (
-              <GridDemo key={i}
-                gutter={state.base}
-                grid={grid} />
-            )
-          })}
+          <TypographyDemo {...this.props} {...this.state} />
         </Section>
+        {/*
+          <Section>
+            {g2.map(function(grid, i) {
+              return (
+                <GridDemo key={i}
+                  gutter={state.base}
+                  grid={grid} />
+              )
+            })}
+          </Section>
+        */}
         <Section>
           <Readme />
         </Section>

@@ -8,8 +8,7 @@ class Scale extends React.Component {
     let scale = ms()
     return (
       <span>
-        Modular Scale:{' '}
-        {this.props.scale.join(' . ')}
+        {this.props.scale.join(' : ')}
       </span>
     )
   }
