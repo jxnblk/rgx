@@ -2,6 +2,7 @@
 import React from 'react'
 import ms from 'simple-modular-scale'
 import { Grid, Cell } from '..'
+import Section from './Section.jsx'
 
 class TypographyDemo extends React.Component {
 
@@ -38,30 +39,32 @@ class TypographyDemo extends React.Component {
       }
     }
     return (
-      <div style={styles.container}>
-        <h2 style={styles.heading}>Typography Demo</h2>
-        <h4>{scale.join(' : ')}</h4>
-        <Grid gutter={props.base}>
-          <Cell min={16 * scale[2]}>
-            <h4 style={styles.a}>{scale[2]}px / {16 * scale[2]}px minimum measure</h4>
-            <p style={styles.a}>
-              {this.props.bacon.substring(0, scale[2] / (1/16) )}...
-            </p>
-          </Cell>
-          <Cell min={16 * scale[1]}>
-            <h4 style={styles.b}>{scale[1]}px / {16 * scale[1]}px minimum measure</h4>
-            <p style={styles.b}>
-              {this.props.bacon.substring(0, scale[1] / (1/32))}...
-            </p>
-          </Cell>
-          <Cell min={16 * scale[0]}>
-            <h4 style={styles.c}>{scale[0]}px / {16 * scale[0]}px minimum measure</h4>
-            <p style={styles.c}>
-              {this.props.bacon}
-            </p>
-          </Cell>
-        </Grid>
-      </div>
+      <Section>
+        <div style={styles.container}>
+          <h2 style={styles.heading}>Typography Demo</h2>
+          <h4>{scale.join(' : ')}</h4>
+          <Grid gutter={props.base}>
+            <Cell min={16 * scale[2]}>
+              <h4 style={styles.a}>{scale[2]}px / {16 * scale[2]}px minimum measure</h4>
+              <p style={styles.a}>
+                {this.props.bacon.substring(0, scale[2] / (1/16) )}...
+              </p>
+            </Cell>
+            <Cell min={16 * scale[1]}>
+              <h4 style={styles.b}>{scale[1]}px / {16 * scale[1]}px minimum measure</h4>
+              <p style={styles.b}>
+                {this.props.bacon.substring(0, scale[1] / (1/32))}...
+              </p>
+            </Cell>
+            <Cell min={16 * scale[0]}>
+              <h4 style={styles.c}>{scale[0]}px / {16 * scale[0]}px minimum measure</h4>
+              <p style={styles.c}>
+                {this.props.bacon}
+              </p>
+            </Cell>
+          </Grid>
+        </div>
+      </Section>
     )
   }
 

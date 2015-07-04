@@ -1,6 +1,7 @@
 
 import React from 'react'
 import md from '../README.md'
+import Section from './Section.jsx'
 
 class Readme extends React.Component {
 
@@ -13,8 +14,10 @@ class Readme extends React.Component {
       maxWidth: '40em',
     }
     return (
-      <div dangerouslySetInnerHTML={html}
-        style={style} />
+      <Section>
+        <div dangerouslySetInnerHTML={html}
+          style={style} />
+      </Section>
     )
   }
 

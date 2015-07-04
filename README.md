@@ -1,6 +1,6 @@
 # Rgx
 
-React grid system based on minimum cell widths
+React grid system – constraint-based responsive grid with no CSS and no media queries.
 
 ## About
 

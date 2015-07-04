@@ -2,8 +2,10 @@
 import React from 'react'
 import { Grid, Cell } from '..'
 import { Header, Footer } from 'blk'
+import ModularScaleDemo from './ModularScaleDemo.jsx'
 import GridDemo from './GridDemo.jsx'
 import TypographyDemo from './TypographyDemo.jsx'
+import NestedGrid from './NestedGrid.jsx'
 import Box from './Box.jsx'
 import Section from './Section.jsx'
 import Controls from './Controls.jsx'
@@ -33,65 +35,14 @@ class App extends React.Component {
     let props = this.props
     let state = this.state
 
-    let scale = ms({
-      base: state.base,
-      factors: [3/2, 4/3],
-      length: 12 
-    })
-
-    let g1 = []
-    for (var i = scale.length - 1; i > -1; i--) {
-      let l = scale.length - i
-      let cells = []
-      let min = scale[i]
-      for (var j = 0; j < l; j++) {
-        cells.push({ min: min })
-      }
-      g1.push({ cells: cells })
-    }
-
-    let g2 = [
-      { cells: [ { min: scale[11] }, { min: scale[10] } ] },
-      { cells: [ { min: scale[9] }, { min: scale[8] } ] },
-      { cells: [ { min: scale[7] }, { min: scale[6] } ] },
-      { cells: [ { min: scale[10] }, { min: scale[9] } ] },
-      { cells: [ { min: scale[8] }, { min: scale[7] } ] },
-      { cells: [ { min: scale[6] }, { min: scale[5] } ] },
-    ]
-
     return (
       <div>
         <Header {...this.props} />
-        <Social />
-        <Section>
-          <h4>
-            <Scale scale={scale} />
-          </h4>
-          {g1.map(function(grid, i) {
-            return (
-              <GridDemo key={i}
-                gutter={state.base}
-                grid={grid} />
-            )
-          })}
-        </Section>
-        <Section>
-          <TypographyDemo {...this.props} {...this.state} />
-        </Section>
-        {/*
-          <Section>
-            {g2.map(function(grid, i) {
-              return (
-                <GridDemo key={i}
-                  gutter={state.base}
-                  grid={grid} />
-              )
-            })}
-          </Section>
-        */}
-        <Section>
-          <Readme />
-        </Section>
+        <Social {...this.props} />
+        <ModularScaleDemo {...this.state} />
+        <TypographyDemo {...this.props} {...this.state} />
+        <NestedGrid {...this.props} {...this.state} />
+        <Readme />
         <Footer {...this.props} />
       </div>
     )
