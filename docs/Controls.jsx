@@ -19,12 +19,6 @@ class Controls extends React.Component {
               onChange={props.onChange} />
           </Cell>
           <Cell min={128}>
-            <Range
-              label='Gutter'
-              name='gutter'
-              max={64}
-              value={props.gutter}
-              onChange={props.onChange} />
           </Cell>
         </Grid>
       </div>

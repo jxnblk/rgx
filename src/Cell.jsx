@@ -5,11 +5,11 @@ class Cell extends React.Component {
 
   render () {
     let props = this.props
+    let width = props.min / props.total * 100
     let style = {
       boxSizing: 'border-box',
       display: props.inline ? 'inline-block' : 'block',
-      //width: props.inline ? (props.min / props.total * props.width) : '100%',
-      width: props.inline ? (props.min / props.total * 100) + '%' : '100%',
+      width: props.inline ? width + '%' : '100%',
       verticalAlign: 'top',
       paddingLeft: props.padding,
       paddingRight: props.padding,

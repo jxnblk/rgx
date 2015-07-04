@@ -31,11 +31,11 @@ var Cell = (function (_React$Component) {
     key: 'render',
     value: function render() {
       var props = this.props;
+      var width = props.min / props.total * 100;
       var style = {
         boxSizing: 'border-box',
         display: props.inline ? 'inline-block' : 'block',
-        //width: props.inline ? (props.min / props.total * props.width) : '100%',
-        width: props.inline ? props.min / props.total * 100 + '%' : '100%',
+        width: props.inline ? width + '%' : '100%',
         verticalAlign: 'top',
         paddingLeft: props.padding,
         paddingRight: props.padding,

@@ -7,7 +7,7 @@ class Grid extends React.Component {
 
   constructor () {
     super ()
-    this.onResize = this.onResize.bind(this)
+    this.update = this.update.bind(this)
     this.state = {
       width: 768,
       inline: false,
@@ -15,7 +15,8 @@ class Grid extends React.Component {
     }
   }
 
-  onResize () {
+  update () {
+    let props = this.props
     let el = React.findDOMNode(this)
     let width = el.offsetWidth
     let inline = false
@@ -23,7 +24,7 @@ class Grid extends React.Component {
     React.Children.map(this.props.children, function(c, i) {
       let min = c.props.min || false
       if (!min) {
-        min = c.props.x * width
+        min = c.props.x * width || props.min
       }
       total += min
     })
@@ -38,16 +39,20 @@ class Grid extends React.Component {
   }
 
   componentDidMount () {
-    this.onResize()
+    this.update()
     if (win) {
-      win.addEventListener('resize', this.onResize)
+      win.addEventListener('resize', this.update)
     }
   }
 
   componentDidUnmount () {
     if (win) {
-      win.removeEventListener('resize', this.onResize)
+      win.removeEventListener('resize', this.update)
     }
+  }
+
+  componentWillReceiveProps () {
+    this.update()
   }
 
   render () {
@@ -76,10 +81,12 @@ class Grid extends React.Component {
 }
 
 Grid.propTypes = {
+  min: React.PropTypes.number,
   gutter: React.PropTypes.number,
 }
 
 Grid.defaultProps = {
+  min: 640,
 }
 
 export default Grid

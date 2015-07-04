@@ -25,7 +25,7 @@ var Grid = (function (_React$Component) {
     _classCallCheck(this, Grid);
 
     _get(Object.getPrototypeOf(Grid.prototype), 'constructor', this).call(this);
-    this.onResize = this.onResize.bind(this);
+    this.update = this.update.bind(this);
     this.state = {
       width: 768,
       inline: false,
@@ -36,8 +36,9 @@ var Grid = (function (_React$Component) {
   _inherits(Grid, _React$Component);
 
   _createClass(Grid, [{
-    key: 'onResize',
-    value: function onResize() {
+    key: 'update',
+    value: function update() {
+      var props = this.props;
       var el = _react2['default'].findDOMNode(this);
       var width = el.offsetWidth;
       var inline = false;
@@ -45,7 +46,7 @@ var Grid = (function (_React$Component) {
       _react2['default'].Children.map(this.props.children, function (c, i) {
         var min = c.props.min || false;
         if (!min) {
-          min = c.props.x * width;
+          min = c.props.x * width || props.min;
         }
         total += min;
       });
@@ -61,17 +62,22 @@ var Grid = (function (_React$Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this.onResize();
+      this.update();
       if (win) {
-        win.addEventListener('resize', this.onResize);
+        win.addEventListener('resize', this.update);
       }
     }
   }, {
     key: 'componentDidUnmount',
     value: function componentDidUnmount() {
       if (win) {
-        win.removeEventListener('resize', this.onResize);
+        win.removeEventListener('resize', this.update);
       }
+    }
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps() {
+      this.update();
     }
   }, {
     key: 'render',
@@ -103,10 +109,13 @@ var Grid = (function (_React$Component) {
 })(_react2['default'].Component);
 
 Grid.propTypes = {
+  min: _react2['default'].PropTypes.number,
   gutter: _react2['default'].PropTypes.number
 };
 
-Grid.defaultProps = {};
+Grid.defaultProps = {
+  min: 640
+};
 
 exports['default'] = Grid;
 module.exports = exports['default'];
