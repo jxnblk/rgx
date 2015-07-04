@@ -9,7 +9,7 @@ class TypographyDemo extends React.Component {
     let props = this.props
     let scale = ms({
       base: 16,
-      factors: [ 9/8, 4/3 ],
+      factors: [ 9/8, 4/3, 4/3 ],
       length: 7
     })
     let font = 'Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif'
