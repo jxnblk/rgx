@@ -7,20 +7,24 @@ class Grid extends React.Component {
 
   constructor () {
     super ()
-    this.update = this.update.bind(this)
+    this.updateWidth = this.updateWidth.bind(this)
+    this.getTotal = this.getTotal.bind(this)
     this.state = {
-      width: 768,
-      inline: false,
-      total: 1024
+      width: 768
     }
   }
 
-  update () {
-    let props = this.props
+  updateWidth () {
     let el = React.findDOMNode(this)
     let width = el.offsetWidth
-    let inline = false
+    this.setState({ width: width })
+  }
+
+  getTotal () {
     let total = 0
+    let props = this.props
+    let width = this.state.width
+    let inline = false
     React.Children.map(this.props.children, function(c, i) {
       let min = c.props.min || false
       if (!min) {
@@ -31,28 +35,24 @@ class Grid extends React.Component {
     if (total < width) {
       inline = true
     }
-    this.setState({
-      width: width,
-      inline: inline,
-      total: total
-    })
+    return { total, inline }
   }
 
   componentDidMount () {
-    this.update()
+    this.updateWidth()
     if (win) {
-      win.addEventListener('resize', this.update)
+      win.addEventListener('resize', this.updateWidth)
     }
   }
 
   componentDidUnmount () {
     if (win) {
-      win.removeEventListener('resize', this.update)
+      win.removeEventListener('resize', this.updateWidth)
     }
   }
 
   componentWillReceiveProps () {
-    this.update()
+    //this.updateWidth()
   }
 
   render () {
@@ -63,12 +63,13 @@ class Grid extends React.Component {
       marginLeft: -props.gutter,
       marginRight: -props.gutter,
     }
+    let childSizes = this.getTotal()
     let children = React.Children.map(this.props.children, function(c) {
       return React.cloneElement(c, {
         padding: props.gutter,
         width: state.width,
-        total: state.total,
-        inline: state.inline
+        total: childSizes.total,
+        inline: childSizes.inline
       })
     })
     return (

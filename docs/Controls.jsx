@@ -12,9 +12,10 @@ class Controls extends React.Component {
         <Grid gutter={16}>
           <Cell min={128}>
             <Range
-              label='Base'
+              label={'Modular Scale Base ' + props.base}
               name='base'
-              max={128}
+              min={1}
+              max={32}
               value={props.base}
               onChange={props.onChange} />
           </Cell>

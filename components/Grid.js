@@ -25,24 +25,29 @@ var Grid = (function (_React$Component) {
     _classCallCheck(this, Grid);
 
     _get(Object.getPrototypeOf(Grid.prototype), 'constructor', this).call(this);
-    this.update = this.update.bind(this);
+    this.updateWidth = this.updateWidth.bind(this);
+    this.getTotal = this.getTotal.bind(this);
     this.state = {
-      width: 768,
-      inline: false,
-      total: 1024
+      width: 768
     };
   }
 
   _inherits(Grid, _React$Component);
 
   _createClass(Grid, [{
-    key: 'update',
-    value: function update() {
-      var props = this.props;
+    key: 'updateWidth',
+    value: function updateWidth() {
       var el = _react2['default'].findDOMNode(this);
       var width = el.offsetWidth;
-      var inline = false;
+      this.setState({ width: width });
+    }
+  }, {
+    key: 'getTotal',
+    value: function getTotal() {
       var total = 0;
+      var props = this.props;
+      var width = this.state.width;
+      var inline = false;
       _react2['default'].Children.map(this.props.children, function (c, i) {
         var min = c.props.min || false;
         if (!min) {
@@ -53,32 +58,26 @@ var Grid = (function (_React$Component) {
       if (total < width) {
         inline = true;
       }
-      this.setState({
-        width: width,
-        inline: inline,
-        total: total
-      });
+      return { total: total, inline: inline };
     }
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this.update();
+      this.updateWidth();
       if (win) {
-        win.addEventListener('resize', this.update);
+        win.addEventListener('resize', this.updateWidth);
       }
     }
   }, {
     key: 'componentDidUnmount',
     value: function componentDidUnmount() {
       if (win) {
-        win.removeEventListener('resize', this.update);
+        win.removeEventListener('resize', this.updateWidth);
       }
     }
   }, {
     key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps() {
-      this.update();
-    }
+    value: function componentWillReceiveProps() {}
   }, {
     key: 'render',
     value: function render() {
@@ -89,12 +88,13 @@ var Grid = (function (_React$Component) {
         marginLeft: -props.gutter,
         marginRight: -props.gutter
       };
+      var childSizes = this.getTotal();
       var children = _react2['default'].Children.map(this.props.children, function (c) {
         return _react2['default'].cloneElement(c, {
           padding: props.gutter,
           width: state.width,
-          total: state.total,
-          inline: state.inline
+          total: childSizes.total,
+          inline: childSizes.inline
         });
       });
       return _react2['default'].createElement(
@@ -119,3 +119,5 @@ Grid.defaultProps = {
 
 exports['default'] = Grid;
 module.exports = exports['default'];
+
+//this.updateWidth()

@@ -12,7 +12,8 @@ import Controls from './Controls.jsx'
 import Scale from './Scale.jsx'
 import Readme from './Readme.jsx'
 import Social from './Social.jsx'
-import css from 'blk/src/css/blk.css'
+//import css from 'blk/src/css/blk.css'
+import css from './base.css'
 import ms from 'simple-modular-scale'
 
 class App extends React.Component {
@@ -37,13 +38,17 @@ class App extends React.Component {
 
     return (
       <div>
-        <Header {...this.props} />
-        <Social {...this.props} />
-        <ModularScaleDemo {...this.state} />
-        <TypographyDemo {...this.props} {...this.state} />
-        <NestedGrid {...this.props} {...this.state} />
+        <Header {...props} />
+        <Social {...props} />
+        <ModularScaleDemo {...state} />
+        <Controls
+          {...state}
+          {...props}
+          onChange={this.handleChange} />
+        <TypographyDemo {...props} {...state} />
+        <NestedGrid {...props} {...state} />
         <Readme />
-        <Footer {...this.props} />
+        <Footer {...props} />
       </div>
     )
   }

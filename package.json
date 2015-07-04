@@ -26,6 +26,8 @@
   "devDependencies": {
     "babel": "^5.6.14",
     "babel-loader": "^5.3.0",
+    "basscss-color-input-range": "^1.0.0",
+    "basscss-input-range": "^1.1.5",
     "blk": "^3.1.0",
     "css-loader": "^0.15.1",
     "cssnext-loader": "^1.0.1",

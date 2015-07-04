@@ -13,7 +13,7 @@ class GridDemo extends React.Component {
           return (
             <Cell key={i}
               min={cell.min}
-              marginBottom={props.gutter}>
+              marginBottom={16}>
               <Box>{cell.min}</Box>
             </Cell>
             )
