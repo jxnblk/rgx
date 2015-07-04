@@ -24,7 +24,7 @@ class Demo extends React.Component {
     return (
       <Grid gutter={8}>
         <Cell min={256}>Min 256</Cell>
-        <Cell min={768}>Min 256</Cell>
+        <Cell min={768}>Min 768</Cell>
       </Grid>
     )
   }
