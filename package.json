@@ -43,5 +43,13 @@
     "style-loader": "^0.12.3",
     "webpack": "^1.10.1",
     "webpack-dev-server": "^1.10.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jxnblk/rgx.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jxnblk/rgx/issues"
+  },
+  "homepage": "https://github.com/jxnblk/rgx"
 }
