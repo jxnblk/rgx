@@ -1,0 +1,28 @@
+
+body {
+  font-family: 'SF Compact Text', 'Helvetica Neue', sans-serif;
+  margin: 0;
+  padding: 0 48px;
+}
+
+h1, h2, h3,
+h4, h5, h6 {
+  font-weight: 500;
+}
+
+hr {
+  margin: 1.5em 0;
+  border: 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.outline, .outline * {
+  outline: 1px solid rgba(0,128,255,.5);
+}
+
+.h5 { font-size: .875rem }
+.bold { font-weight: bold }
+.py3 { padding-top: 2rem; padding-bottom: 2rem; }
+.block { display: block }
+.col-12 { width: 100% }
+
