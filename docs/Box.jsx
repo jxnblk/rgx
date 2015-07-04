@@ -5,8 +5,11 @@ class Box extends React.Component {
 
   render () {
     let style = {
-      padding: 16,
-      border: '2px solid silver'
+      fontWeight: 'bold',
+      textAlign: 'center',
+      padding: '8px 4px',
+      //backgroundColor: '#eee',
+      border: '1px solid silver'
     }
     return (
       <div style={style}>

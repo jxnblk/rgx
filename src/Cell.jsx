@@ -13,6 +13,7 @@ class Cell extends React.Component {
       verticalAlign: 'top',
       paddingLeft: props.padding,
       paddingRight: props.padding,
+      marginBottom: props.marginBottom,
       position: 'relative'
     }
     return (
@@ -28,6 +29,7 @@ Cell.propTypes = {
   total: React.PropTypes.number,
   width: React.PropTypes.number,
   padding: React.PropTypes.number,
+  marginBottom: React.PropTypes.number,
   inline: React.PropTypes.bool,
 }
 
@@ -36,6 +38,7 @@ Cell.defaultProps = {
   total: 1024,
   width: 1024,
   padding: 0,
+  marginBottom: 0,
   inline: false
 }
 

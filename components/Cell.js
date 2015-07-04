@@ -39,6 +39,7 @@ var Cell = (function (_React$Component) {
         verticalAlign: 'top',
         paddingLeft: props.padding,
         paddingRight: props.padding,
+        marginBottom: props.marginBottom,
         position: 'relative'
       };
       return _react2['default'].createElement(
@@ -57,6 +58,7 @@ Cell.propTypes = {
   total: _react2['default'].PropTypes.number,
   width: _react2['default'].PropTypes.number,
   padding: _react2['default'].PropTypes.number,
+  marginBottom: _react2['default'].PropTypes.number,
   inline: _react2['default'].PropTypes.bool
 };
 
@@ -65,6 +67,7 @@ Cell.defaultProps = {
   total: 1024,
   width: 1024,
   padding: 0,
+  marginBottom: 0,
   inline: false
 };
 

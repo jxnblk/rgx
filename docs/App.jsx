@@ -1,27 +1,22 @@
 
 import React from 'react'
 import { Grid, Cell } from '..'
-import Controls from './Controls.jsx'
+import { Header, Footer } from 'blk'
+import GridDemo from './GridDemo.jsx'
 import Box from './Box.jsx'
-import css from './base.css'
-import modular from './modular-scale'
-
-const scale = [
-    128,
-    192,
-    256,
-    384,
-    512,
-    768,
-    1024,
-]
+import Section from './Section.jsx'
+import Controls from './Controls.jsx'
+import Scale from './Scale.jsx'
+import Readme from './Readme.jsx'
+import css from 'blk/src/css/blk.css'
+import ms from 'simple-modular-scale'
 
 class App extends React.Component {
 
   constructor () {
     super ()
     this.state = {
-      gutter: 24
+      base: 16,
     }
     this.handleChange = this.handleChange.bind(this)
   }
@@ -36,143 +31,60 @@ class App extends React.Component {
     let props = this.props
     let state = this.state
 
-    let ms = modular(16, [1.5, 4/3], 11)
+    let scale = ms({
+      base: state.base,
+      factors: [3/2, 4/3],
+      length: 12 
+    })
 
-    let grids = []
-    for (var i = ms.length - 1; i > 0; i--) {
-      grids.push({
-        cells: [
-          { i: i, min: ms[i] },
-          { i: i - 1 || 0, min: ms[i - 1] || ms[0] },
-        ]
-      })
+    let g1 = []
+    for (var i = scale.length - 1; i > -1; i--) {
+      let l = scale.length - i
+      let cells = []
+      let min = scale[i]
+      for (var j = 0; j < l; j++) {
+        cells.push({ min: min })
+      }
+      g1.push({ cells: cells })
     }
+
+    let g2 = [
+      { cells: [ { min: scale[11] }, { min: scale[10] } ] },
+      { cells: [ { min: scale[9] }, { min: scale[8] } ] },
+      { cells: [ { min: scale[7] }, { min: scale[6] } ] },
+      { cells: [ { min: scale[10] }, { min: scale[9] } ] },
+      { cells: [ { min: scale[8] }, { min: scale[7] } ] },
+      { cells: [ { min: scale[6] }, { min: scale[5] } ] },
+    ]
 
     return (
       <div>
-        <h1 className='mb0'>rgx</h1>
-        <h2 className='h3 mt0'>React Grid System</h2>
-        <p>
-          Constraint-based grid with minimum column widths
-        </p>
-        <hr />
-        <pre>
-          {ms.join(' . ')}
-        </pre>
-        <div>
-          {grids.map(function(g, i) {
+        <Header {...this.props} />
+        <Section>
+          <h2>
+            <Scale scale={scale} />
+          </h2>
+          {g1.map(function(grid, i) {
             return (
-              <Grid key={i} gutter={state.gutter}>
-                {g.cells.map(function(c, i) {
-                  return (
-                    <Cell key={i}
-                      min={c.min}>
-                      <Box>
-                        <h4>Cell {c.i} min {c.min}</h4>
-                      </Box>
-                    </Cell>
-                  )
-                })}
-              </Grid>
+              <GridDemo key={i}
+                gutter={state.base}
+                grid={grid} />
             )
           })}
-        </div>
-        <hr />
-        <div className=''>
-          <Grid gutter={state.gutter}>
-            <Cell min={scale[5]}>
-              <Box>
-                <h3>Cell min {scale[5]}</h3>
-              </Box>
-            </Cell>
-            <Cell min={scale[4]}>
-              <Box>
-                <h3>Cell min {scale[4]}</h3>
-              </Box>
-            </Cell>
-          </Grid>
-        </div>
-        <hr />
-        <div className=''>
-          <Grid gutter={state.gutter}>
-            <Cell min={scale[3]}>
-              <Box>
-                <h3>Cell min {scale[3]}</h3>
-              </Box>
-            </Cell>
-            <Cell min={scale[2]}>
-              <Box>
-                <h3>Cell min {scale[2]}</h3>
-              </Box>
-            </Cell>
-          </Grid>
-        </div>
-        <hr />
-        <div className=''>
-          <Grid gutter={state.gutter}>
-            <Cell min={scale[4]}>
-              <Box>
-                <h3>Cell min {scale[4]}</h3>
-              </Box>
-            </Cell>
-            <Cell min={scale[3]}>
-              <Box>
-                <h3>Cell min {scale[3]}</h3>
-              </Box>
-            </Cell>
-          </Grid>
-        </div>
-        <hr />
-        <div className=''>
-          <Grid gutter={state.gutter}>
-            <Cell min={scale[2]}>
-              <Box>
-                <h3>Cell min {scale[2]}</h3>
-              </Box>
-            </Cell>
-            <Cell min={scale[1]}>
-              <Box>
-                <h3>Cell min {scale[1]}</h3>
-              </Box>
-            </Cell>
-          </Grid>
-        </div>
-        <hr />
-        <div className=''>
-          <Grid gutter={state.gutter}>
-            <Cell min={256}>
-              <Box> <h3>Cell min 256</h3> </Box>
-            </Cell>
-            <Cell min={256}>
-              <Box> <h3>Cell min 256</h3> </Box>
-            </Cell>
-            <Cell min={256}>
-              <Box> <h3>Cell min 256</h3> </Box>
-            </Cell>
-          </Grid>
-        </div>
-        <hr />
-        <div className=''>
-          <Grid gutter={state.gutter}>
-            <Cell min={128}> <Box> <h3>Cell 128</h3> </Box> </Cell>
-            <Cell min={128}> <Box> <h3>Cell 128</h3> </Box> </Cell>
-            <Cell min={128}> <Box> <h3>Cell 128</h3> </Box> </Cell>
-            <Cell min={128}> <Box> <h3>Cell 128</h3> </Box> </Cell>
-            <Cell min={128}> <Box> <h3>Cell 128</h3> </Box> </Cell>
-            <Cell min={128}> <Box> <h3>Cell 128</h3> </Box> </Cell>
-          </Grid>
-        </div>
-        <hr />
-        <div className=''>
-          <Grid gutter={state.gutter}>
-            <Cell min={128}> <Box> <h3>Cell 128</h3> </Box> </Cell>
-            <Cell min={320}> <Box> <h3>Cell 320</h3> </Box> </Cell>
-          </Grid>
-        </div>
-        <div className='py3'>
-          <Controls {...state} 
-            onChange={this.handleChange} />
-        </div>
+        </Section>
+        <Section>
+          {g2.map(function(grid, i) {
+            return (
+              <GridDemo key={i}
+                gutter={state.base}
+                grid={grid} />
+            )
+          })}
+        </Section>
+        <Section>
+          <Readme />
+        </Section>
+        <Footer {...this.props} />
       </div>
     )
   }

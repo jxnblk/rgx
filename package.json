@@ -1,7 +1,7 @@
 {
   "name": "rgx",
   "version": "0.1.0",
-  "description": "React constraint-based grid system",
+  "description": "React grid system based on minimum cell widths",
   "main": "components/index.js",
   "directories": {
     "doc": "docs"
@@ -16,6 +16,7 @@
   "author": "Brent Jackson",
   "license": "MIT",
   "keywords": [
+    "constraint",
     "grid",
     "layout",
     "react",
@@ -25,11 +26,20 @@
   "devDependencies": {
     "babel": "^5.6.14",
     "babel-loader": "^5.3.0",
+    "blk": "^3.1.0",
     "css-loader": "^0.15.1",
     "cssnext-loader": "^1.0.1",
+    "file-loader": "^0.8.4",
+    "html-loader": "^0.3.0",
+    "json-loader": "^0.5.2",
+    "lodash": "^3.10.0",
+    "markdown-loader": "^0.1.3",
+    "marked": "^0.3.3",
     "node-libs-browser": "^0.5.2",
+    "raw-loader": "^0.5.1",
     "react": "^0.13.3",
     "rebass": "^0.1.3",
+    "simple-modular-scale": "^1.0.1",
     "style-loader": "^0.12.3",
     "webpack": "^1.10.1",
     "webpack-dev-server": "^1.10.1"
