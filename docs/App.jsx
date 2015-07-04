@@ -1,13 +1,14 @@
 
 import React from 'react'
 import { Grid, Cell } from '..'
-import { Header, Footer, TweetButton } from 'blk'
+import { Header, Footer } from 'blk'
 import GridDemo from './GridDemo.jsx'
 import Box from './Box.jsx'
 import Section from './Section.jsx'
 import Controls from './Controls.jsx'
 import Scale from './Scale.jsx'
 import Readme from './Readme.jsx'
+import Social from './Social.jsx'
 import css from 'blk/src/css/blk.css'
 import ms from 'simple-modular-scale'
 
@@ -60,7 +61,7 @@ class App extends React.Component {
     return (
       <div>
         <Header {...this.props} />
-        <TweetButton text={this.props.description} />
+        <Social />
         <Section>
           <h2>
             <Scale scale={scale} />
