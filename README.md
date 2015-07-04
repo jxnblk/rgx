@@ -30,7 +30,7 @@ class Demo extends React.Component {
   }
 }
 
-React.render(Demo, document.querySelector('#demo'))
+React.render(<Demo />, document.querySelector('#demo'))
 ```
 
 ## Performance
