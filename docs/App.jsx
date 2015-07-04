@@ -1,7 +1,7 @@
 
 import React from 'react'
 import { Grid, Cell } from '..'
-import { Header, Footer } from 'blk'
+import { Header, Footer, TweetButton } from 'blk'
 import GridDemo from './GridDemo.jsx'
 import Box from './Box.jsx'
 import Section from './Section.jsx'
@@ -60,6 +60,7 @@ class App extends React.Component {
     return (
       <div>
         <Header {...this.props} />
+        <TweetButton text={this.props.description} />
         <Section>
           <h2>
             <Scale scale={scale} />
