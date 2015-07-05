@@ -10,9 +10,9 @@ class ModularScaleDemo extends React.Component {
   render () {
     let props = this.props
     let scale = ms({
-      base: props.base,
+      base: 4 * props.base,
       ratios: [3/2, 4/3],
-      length: 12 
+      length: 8 
     })
 
     let g1 = []

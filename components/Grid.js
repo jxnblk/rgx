@@ -46,19 +46,14 @@ var Grid = (function (_React$Component) {
     value: function getTotal() {
       var total = 0;
       var props = this.props;
-      var width = this.state.width;
-      var inline = false;
       _react2['default'].Children.map(this.props.children, function (c, i) {
         var min = c.props.min || false;
         if (!min) {
-          min = c.props.x * width || props.min;
+          min = props.min;
         }
         total += min;
       });
-      if (total < width) {
-        inline = true;
-      }
-      return { total: total, inline: inline };
+      return total;
     }
   }, {
     key: 'componentDidMount',
@@ -88,13 +83,13 @@ var Grid = (function (_React$Component) {
         marginLeft: -props.gutter,
         marginRight: -props.gutter
       };
-      var childSizes = this.getTotal();
+      var total = this.getTotal();
       var children = _react2['default'].Children.map(this.props.children, function (c) {
+        var min = c.props.min;
         return _react2['default'].cloneElement(c, {
           padding: props.gutter,
-          width: state.width,
-          total: childSizes.total,
-          inline: childSizes.inline
+          width: min / total * 100,
+          inline: total < state.width
         });
       });
       return _react2['default'].createElement(
@@ -114,7 +109,8 @@ Grid.propTypes = {
 };
 
 Grid.defaultProps = {
-  min: 640
+  min: 640,
+  gutter: 0
 };
 
 exports['default'] = Grid;

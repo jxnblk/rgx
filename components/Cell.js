@@ -31,11 +31,10 @@ var Cell = (function (_React$Component) {
     key: 'render',
     value: function render() {
       var props = this.props;
-      var width = props.min / props.total * 100;
       var style = {
         boxSizing: 'border-box',
         display: props.inline ? 'inline-block' : 'block',
-        width: props.inline ? width + '%' : '100%',
+        width: props.inline ? props.width + '%' : '100%',
         verticalAlign: 'top',
         paddingLeft: props.padding,
         paddingRight: props.padding,
@@ -55,7 +54,6 @@ var Cell = (function (_React$Component) {
 
 Cell.propTypes = {
   min: _react2['default'].PropTypes.number,
-  total: _react2['default'].PropTypes.number,
   width: _react2['default'].PropTypes.number,
   padding: _react2['default'].PropTypes.number,
   marginBottom: _react2['default'].PropTypes.number,
@@ -64,8 +62,7 @@ Cell.propTypes = {
 
 Cell.defaultProps = {
   min: 640,
-  total: 1024,
-  width: 1024,
+  width: 100,
   padding: 0,
   marginBottom: 0,
   inline: false

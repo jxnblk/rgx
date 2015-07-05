@@ -23,19 +23,14 @@ class Grid extends React.Component {
   getTotal () {
     let total = 0
     let props = this.props
-    let width = this.state.width
-    let inline = false
     React.Children.map(this.props.children, function(c, i) {
       let min = c.props.min || false
       if (!min) {
-        min = c.props.x * width || props.min
+        min = props.min
       }
       total += min
     })
-    if (total < width) {
-      inline = true
-    }
-    return { total, inline }
+    return total
   }
 
   componentDidMount () {
@@ -63,13 +58,13 @@ class Grid extends React.Component {
       marginLeft: -props.gutter,
       marginRight: -props.gutter,
     }
-    let childSizes = this.getTotal()
+    let total = this.getTotal()
     let children = React.Children.map(this.props.children, function(c) {
+      let min = c.props.min
       return React.cloneElement(c, {
         padding: props.gutter,
-        width: state.width,
-        total: childSizes.total,
-        inline: childSizes.inline
+        width: min / total * 100,
+        inline: total < state.width
       })
     })
     return (
@@ -88,6 +83,7 @@ Grid.propTypes = {
 
 Grid.defaultProps = {
   min: 640,
+  gutter: 0
 }
 
 export default Grid
