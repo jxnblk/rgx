@@ -85,12 +85,14 @@ var Grid = (function (_React$Component) {
       };
       var total = this.getTotal();
       var children = _react2['default'].Children.map(this.props.children, function (c) {
-        var min = c.props.min;
-        return _react2['default'].cloneElement(c, {
-          padding: props.gutter,
-          width: min / total * 100,
+        var childProps = {
+          width: c.props.min / total,
           inline: total < state.width
-        });
+        };
+        if (!c.props.padding) {
+          childProps.padding = props.gutter;
+        }
+        return _react2['default'].cloneElement(c, childProps);
       });
       return _react2['default'].createElement(
         'div',

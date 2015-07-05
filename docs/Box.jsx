@@ -8,7 +8,7 @@ class Box extends React.Component {
       fontWeight: 'bold',
       textAlign: 'center',
       padding: '8px 4px',
-      //backgroundColor: '#eee',
+      marginBottom: 16,
       border: '1px solid silver'
     }
     return (

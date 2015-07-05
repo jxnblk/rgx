@@ -34,11 +34,10 @@ var Cell = (function (_React$Component) {
       var style = {
         boxSizing: 'border-box',
         display: props.inline ? 'inline-block' : 'block',
-        width: props.inline ? props.width + '%' : '100%',
+        width: props.inline ? props.width * 100 + '%' : '100%',
         verticalAlign: 'top',
         paddingLeft: props.padding,
         paddingRight: props.padding,
-        marginBottom: props.marginBottom,
         position: 'relative'
       };
       return _react2['default'].createElement(
@@ -56,7 +55,6 @@ Cell.propTypes = {
   min: _react2['default'].PropTypes.number,
   width: _react2['default'].PropTypes.number,
   padding: _react2['default'].PropTypes.number,
-  marginBottom: _react2['default'].PropTypes.number,
   inline: _react2['default'].PropTypes.bool
 };
 
@@ -64,7 +62,6 @@ Cell.defaultProps = {
   min: 640,
   width: 100,
   padding: 0,
-  marginBottom: 0,
   inline: false
 };
 

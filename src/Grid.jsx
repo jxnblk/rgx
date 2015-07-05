@@ -60,12 +60,14 @@ class Grid extends React.Component {
     }
     let total = this.getTotal()
     let children = React.Children.map(this.props.children, function(c) {
-      let min = c.props.min
-      return React.cloneElement(c, {
-        padding: props.gutter,
-        width: min / total * 100,
+      let childProps = {
+        width: c.props.min / total,
         inline: total < state.width
-      })
+      }
+      if (!c.props.padding) {
+        childProps.padding = props.gutter
+      }
+      return React.cloneElement(c, childProps)
     })
     return (
       <div style={style}>

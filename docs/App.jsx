@@ -7,6 +7,7 @@ import GridDemo from './GridDemo.jsx'
 import TypographyDemo from './TypographyDemo.jsx'
 import NestedGrid from './NestedGrid.jsx'
 import RatiosDemo from './RatiosDemo.jsx'
+import CellDemo from './CellDemo.jsx'
 import Box from './Box.jsx'
 import Section from './Section.jsx'
 import Controls from './Controls.jsx'
@@ -49,6 +50,7 @@ class App extends React.Component {
         <TypographyDemo {...props} {...state} />
         <NestedGrid {...props} {...state} />
         <RatiosDemo {...props} {...state} />
+        <CellDemo />
         <Readme />
         <Footer {...props} />
       </div>

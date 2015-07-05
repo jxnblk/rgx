@@ -33,6 +33,20 @@ class Demo extends React.Component {
 React.render(<Demo />, document.querySelector('#demo'))
 ```
 
+## Grid Component
+
+#### Props
+- `gutter` - pixel value to set negative margins on the Grid component and padding on Cell components to create gutters.
+- `min` - pixel value to set a default `min` prop for child Cells
+
+## Cell Component
+
+#### Props
+- `min` - pixel value to set the min-width at which a Cell is displayed inline.
+- `padding` - sets left and right padding. This is used by the Grid component when the `gutter` prop is set and the Cell has no padding set.
+- `width` - fraction value used by the Grid component to set a width. This can also be set manually when used independently from the Grid component
+- `inline` - boolean value used by the Grid component to display a Cell inline.
+
 ## Performance
 
 I have yet to do any performance audits, and since the Grid component listens to window resize events,
