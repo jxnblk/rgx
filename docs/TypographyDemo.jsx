@@ -43,7 +43,7 @@ class TypographyDemo extends React.Component {
         <div style={styles.container}>
           <h2 style={styles.heading}>Typography Demo</h2>
           <p style={styles.b}>
-            Font sizes are based on a modular scale, and each Cell’s `min` property is set to the font size multiplied by 16.
+            In this example, font sizes are based on a modular scale, and each Cell’s <code>min</code> property is set to the font size multiplied by 16.
           </p>
           <Grid gutter={props.base}>
             <Cell min={16 * scale[2]}>

@@ -1,7 +1,7 @@
 {
   "name": "rgx",
   "version": "0.1.1",
-  "description": "React grid system – constraint-based responsive grid with no CSS and no media queries",
+  "description": "React grid system – minimum width based responsive grid with no CSS and no media queries",
   "main": "components/index.js",
   "directories": {
     "doc": "docs"
