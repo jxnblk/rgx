@@ -10,7 +10,7 @@ class TypographyDemo extends React.Component {
     let props = this.props
     let scale = ms({
       base: props.base,
-      factors: [ 9/8, 4/3, 4/3 ],
+      ratios: [ 9/8, 4/3, 4/3 ],
       length: 6
     })
     let font = 'Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif'
@@ -42,7 +42,9 @@ class TypographyDemo extends React.Component {
       <Section>
         <div style={styles.container}>
           <h2 style={styles.heading}>Typography Demo</h2>
-          <h4>{scale.join(' : ')}</h4>
+          <p style={styles.b}>
+            Font sizes are based on a modular scale, and each Cell’s `min` property is set to the font size multiplied by 16.
+          </p>
           <Grid gutter={props.base}>
             <Cell min={16 * scale[2]}>
               <h4 style={styles.a}>{scale[2]}px / {16 * scale[2]}px minimum measure</h4>

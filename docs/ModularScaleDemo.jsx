@@ -1,9 +1,9 @@
 
 import React from 'react'
 import ms from 'simple-modular-scale'
+import { Grid, Cell } from '..'
 import GridDemo from './GridDemo.jsx'
 import Section from './Section.jsx'
-import Scale from './Scale.jsx'
 
 class ModularScaleDemo extends React.Component {
 
@@ -11,7 +11,7 @@ class ModularScaleDemo extends React.Component {
     let props = this.props
     let scale = ms({
       base: props.base,
-      factors: [3/2, 4/3],
+      ratios: [3/2, 4/3],
       length: 12 
     })
 
@@ -28,9 +28,15 @@ class ModularScaleDemo extends React.Component {
 
     return (
       <Section>
-        <h4>
-          <Scale scale={scale} />
-        </h4>
+        <Grid>
+          <Cell min={scale[10]}>
+            <p>
+              Each Cell has a `min` prop that defines the minimum width at which it can be set inline as a column.
+              Once set inline, each Cell’s width is determined as the ratio of its minimum width to the total for all Cells in a Grid row.
+            </p>
+          </Cell>
+          <Cell min={scale[9]} />
+        </Grid>
         {g1.map(function(grid, i) {
           return (
             <GridDemo key={i}
@@ -38,6 +44,9 @@ class ModularScaleDemo extends React.Component {
               grid={grid} />
             )
         })}
+        <p>
+          Sizes are based on a <a href='//github.com/jxnblk/simple-modular-scale'>modular scale</a>: {scale.join(' : ')}
+        </p>
       </Section>
     )
   }

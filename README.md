@@ -36,7 +36,7 @@ React.render(<Demo />, document.querySelector('#demo'))
 ## Performance
 
 I have yet to do any performance audits, and since the Grid component listens to window resize events,
-this probably has huge performance issues. Any help in that area would be greatly appreciated.
+this probably has some performance issues. Any help in that area would be greatly appreciated.
 
 MIT License
 
