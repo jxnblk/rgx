@@ -46,24 +46,25 @@ class TypographyDemo extends React.Component {
             In this example, font sizes are based on a modular scale, and each Cell’s <code>min</code> property is set to the font size multiplied by 16.
           </p>
           <Grid gutter={props.base}>
-            <Cell min={16 * scale[2]}>
-              <h4 style={styles.a}>{scale[2]}px / {16 * scale[2]}px minimum measure</h4>
+            <Cell min={16 * scale[2]} max={32 * scale[2]}>
+              <h4 style={styles.a}>{scale[2]}px • {16 * scale[2]}/{32 * scale[2]}px min/max</h4>
               <p style={styles.a}>
                 {this.props.bacon.substring(0, scale[2] / (1/16) )}...
               </p>
             </Cell>
-            <Cell min={16 * scale[1]}>
-              <h4 style={styles.b}>{scale[1]}px / {16 * scale[1]}px minimum measure</h4>
+            <Cell min={16 * scale[1]} max={32 * scale[1]}>
+              <h4 style={styles.b}>{scale[1]}px • {16 * scale[1]}/{32 * scale[1]}px min/max</h4>
               <p style={styles.b}>
                 {this.props.bacon.substring(0, scale[1] / (1/32))}...
               </p>
             </Cell>
             <Cell min={16 * scale[0]}>
-              <h4 style={styles.c}>{scale[0]}px / {16 * scale[0]}px minimum measure</h4>
+              <h4 style={styles.c}>{scale[0]}px • {16 * scale[0]}px min</h4>
               <p style={styles.c}>
                 {this.props.bacon}
               </p>
             </Cell>
+            <Cell min={.5} />
           </Grid>
         </div>
       </Section>

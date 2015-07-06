@@ -26,6 +26,17 @@ class Cell extends React.Component {
 Cell.propTypes = {
   min: React.PropTypes.number,
   max: React.PropTypes.number,
+  /*
+  max: function(props, name) {
+    if (typeof props[name] === 'undefined') {
+      return false
+    } else if (typeof props[name] !== 'number') {
+      return new Error('max should be a number');
+    } else if (props[name] > props.min) {
+      return new Error('max should be greater than min');
+    }
+  },
+  */
   width: React.PropTypes.number,
   padding: React.PropTypes.number,
   inline: React.PropTypes.bool,

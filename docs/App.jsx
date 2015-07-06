@@ -1,21 +1,16 @@
 
 import React from 'react'
-import { Grid, Cell } from '..'
 import { Header, Footer } from 'blk'
+import Intro from './Intro.jsx'
 import ModularScaleDemo from './ModularScaleDemo.jsx'
 import GridDemo from './GridDemo.jsx'
 import TypographyDemo from './TypographyDemo.jsx'
 import NestedGrid from './NestedGrid.jsx'
 import RatiosDemo from './RatiosDemo.jsx'
 import CellDemo from './CellDemo.jsx'
-import Box from './Box.jsx'
-import Section from './Section.jsx'
-import Controls from './Controls.jsx'
-import Readme from './Readme.jsx'
 import Social from './Social.jsx'
-import Dev from './Dev.jsx'
+import Cta from './Cta.jsx'
 import css from './base.css'
-import ms from 'simple-modular-scale'
 
 class App extends React.Component {
 
@@ -41,13 +36,13 @@ class App extends React.Component {
       <div>
         <Header {...props} />
         <Social {...props} />
+        <Intro />
         <ModularScaleDemo {...state} />
         <TypographyDemo {...props} {...state} />
         <NestedGrid {...props} {...state} />
         <RatiosDemo {...props} {...state} />
         <CellDemo />
-        <Dev />
-        <Readme />
+        <Cta />
         <Footer {...props} />
       </div>
     )

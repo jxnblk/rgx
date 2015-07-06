@@ -11,14 +11,6 @@ class CellDemo extends React.Component {
     return (
       <Section>
         <h2>Cell</h2>
-        <Grid>
-          <Cell min={512}>
-            <p>
-              The Cell component can be used independently to manually arrange elements inline with a set percentage based width.
-            </p>
-          </Cell>
-          <Cell min={384} />
-        </Grid>
         <div>
           <Cell width={1/4} inline>
             <Box>
@@ -42,6 +34,14 @@ class CellDemo extends React.Component {
             </Box>
           </Cell>
         </div>
+        <Grid>
+          <Cell min={512} max={768}>
+            <p>
+              The Cell component can be used independently to manually arrange elements inline with a set percentage based width.
+            </p>
+          </Cell>
+          <Cell min={128} />
+        </Grid>
       </Section>
     )
   }

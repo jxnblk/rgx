@@ -30,14 +30,6 @@ class RatiosDemo extends React.Component {
     return (
       <Section>
         <h2>Similar Ratios</h2>
-        <Grid>
-          <Cell min={512}>
-            <p>
-              Cells with similar ratios will align horizontally when they are set inline. Different `min` values will cause the Cells to collapse at different widths.
-            </p>
-          </Cell>
-          <Cell min={384} />
-        </Grid>
         {grids.map(function(grid, i) {
           return (
             <GridDemo key={i}
@@ -45,6 +37,14 @@ class RatiosDemo extends React.Component {
               grid={grid} />
           )
         })}
+        <Grid>
+          <Cell min={512} max={768}>
+            <p>
+              Cells with similar ratios will align horizontally when they are set inline. Different `min` values will cause the Cells to collapse at different widths.
+            </p>
+          </Cell>
+          <Cell min={128} />
+        </Grid>
       </Section>
     )
   }
