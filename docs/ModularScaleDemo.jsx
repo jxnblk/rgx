@@ -38,7 +38,6 @@ class ModularScaleDemo extends React.Component {
         <Grid>
           <Cell min={scale[7]} max={scale[6]}>
             <p>
-              {typeof scale[6]}
               Each Cell has a <code>min</code> prop that defines the minimum width at which it can be set inline as a column.
               Once set inline, each Cell’s width is determined as the ratio of its minimum width to the total for all Cells in a Grid row.
             </p>
