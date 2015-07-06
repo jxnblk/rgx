@@ -13,6 +13,7 @@ import Section from './Section.jsx'
 import Controls from './Controls.jsx'
 import Readme from './Readme.jsx'
 import Social from './Social.jsx'
+import Dev from './Dev.jsx'
 import css from './base.css'
 import ms from 'simple-modular-scale'
 
@@ -38,21 +39,18 @@ class App extends React.Component {
 
     return (
       <div>
+        <Dev />
+        {/*
         <Header {...props} />
         <Social {...props} />
         <ModularScaleDemo {...state} />
-        {/*
-        <Controls
-          {...state}
-          {...props}
-          onChange={this.handleChange} />
-        */}
         <TypographyDemo {...props} {...state} />
         <NestedGrid {...props} {...state} />
         <RatiosDemo {...props} {...state} />
         <CellDemo />
         <Readme />
         <Footer {...props} />
+        */}
       </div>
     )
   }

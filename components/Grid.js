@@ -81,12 +81,29 @@ var Grid = (function (_React$Component) {
       var style = {
         overflow: 'hidden',
         marginLeft: -props.gutter,
-        marginRight: -props.gutter
+        marginRight: -props.gutter,
+
+        position: 'relative'
       };
       var total = this.getTotal();
+      var offset = 0;
+      _react2['default'].Children.map(this.props.children, function (c) {
+        if (c.props.max && c.props.min / total * state.width > c.props.max) {
+          var max = c.props.max;
+          var min = c.props.min;
+          var w = state.width;
+
+          offset += (total - min) / (1 - max / w) - total;
+        }
+      });
       var children = _react2['default'].Children.map(this.props.children, function (c) {
+        var width = c.props.min / (total + offset);
+        if (c.props.max && c.props.min / total * state.width > c.props.max) {
+          width = c.props.max / state.width;
+        }
         var childProps = {
-          width: c.props.min / total,
+          width: width,
+          gridWidth: state.width,
           inline: total < state.width
         };
         if (!c.props.padding) {

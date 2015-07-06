@@ -57,11 +57,28 @@ class Grid extends React.Component {
       overflow: 'hidden',
       marginLeft: -props.gutter,
       marginRight: -props.gutter,
+
+      position: 'relative'
     }
     let total = this.getTotal()
+    let offset = 0
+    React.Children.map(this.props.children, function(c) {
+      if (c.props.max && c.props.min / total * state.width > c.props.max) {
+        let max = c.props.max
+        let min = c.props.min
+        let w = state.width
+
+        offset += ((total - min) / (1 - max / w)) - total
+      }
+    })
     let children = React.Children.map(this.props.children, function(c) {
+      let width = c.props.min / (total + offset)
+      if (c.props.max && c.props.min / total * state.width > c.props.max) {
+        width = c.props.max / state.width
+      }
       let childProps = {
-        width: c.props.min / total,
+        width: width,
+        gridWidth: state.width,
         inline: total < state.width
       }
       if (!c.props.padding) {

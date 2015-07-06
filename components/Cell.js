@@ -53,6 +53,7 @@ var Cell = (function (_React$Component) {
 
 Cell.propTypes = {
   min: _react2['default'].PropTypes.number,
+  max: _react2['default'].PropTypes.number,
   width: _react2['default'].PropTypes.number,
   padding: _react2['default'].PropTypes.number,
   inline: _react2['default'].PropTypes.bool
@@ -60,6 +61,7 @@ Cell.propTypes = {
 
 Cell.defaultProps = {
   min: 640,
+  max: null,
   width: 100,
   padding: 0,
   inline: false

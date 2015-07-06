@@ -24,6 +24,7 @@ class Cell extends React.Component {
 
 Cell.propTypes = {
   min: React.PropTypes.number,
+  max: React.PropTypes.number,
   width: React.PropTypes.number,
   padding: React.PropTypes.number,
   inline: React.PropTypes.bool,
@@ -31,6 +32,7 @@ Cell.propTypes = {
 
 Cell.defaultProps = {
   min: 640,
+  max: null,
   width: 100,
   padding: 0,
   inline: false
