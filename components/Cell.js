@@ -40,6 +40,7 @@ var Cell = (function (_React$Component) {
         paddingRight: props.padding,
         position: 'relative'
       };
+
       return _react2['default'].createElement(
         'div',
         { style: style },
@@ -53,6 +54,18 @@ var Cell = (function (_React$Component) {
 
 Cell.propTypes = {
   min: _react2['default'].PropTypes.number,
+  max: _react2['default'].PropTypes.number,
+  /*
+  max: function(props, name) {
+    if (typeof props[name] === 'undefined') {
+      return false
+    } else if (typeof props[name] !== 'number') {
+      return new Error('max should be a number');
+    } else if (props[name] > props.min) {
+      return new Error('max should be greater than min');
+    }
+  },
+  */
   width: _react2['default'].PropTypes.number,
   padding: _react2['default'].PropTypes.number,
   inline: _react2['default'].PropTypes.bool
@@ -60,6 +73,7 @@ Cell.propTypes = {
 
 Cell.defaultProps = {
   min: 640,
+  max: null,
   width: 100,
   padding: 0,
   inline: false

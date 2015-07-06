@@ -14,6 +14,7 @@ class Cell extends React.Component {
       paddingRight: props.padding,
       position: 'relative'
     }
+
     return (
       <div style={style}>
         {this.props.children}
@@ -24,6 +25,18 @@ class Cell extends React.Component {
 
 Cell.propTypes = {
   min: React.PropTypes.number,
+  max: React.PropTypes.number,
+  /*
+  max: function(props, name) {
+    if (typeof props[name] === 'undefined') {
+      return false
+    } else if (typeof props[name] !== 'number') {
+      return new Error('max should be a number');
+    } else if (props[name] > props.min) {
+      return new Error('max should be greater than min');
+    }
+  },
+  */
   width: React.PropTypes.number,
   padding: React.PropTypes.number,
   inline: React.PropTypes.bool,
@@ -31,6 +44,7 @@ Cell.propTypes = {
 
 Cell.defaultProps = {
   min: 640,
+  max: null,
   width: 100,
   padding: 0,
   inline: false

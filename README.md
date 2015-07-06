@@ -1,13 +1,16 @@
 # Rgx
 
-React grid system – minimum width based responsive grid with no CSS and no media queries.
+React grid system – constraint-based responsive grid with no CSS and no media queries.
 
 ## About
 
-Rgx is an experimental, responsive grid system built purely in React with no CSS and no media queries.
+Rgx is an experimental, responsive grid system based on <b>minimum and maximum widths</b> and designed for content-out layout.
+Rgx is built purely in React and uses inline styles, with no CSS and no media queries.
 Each Grid row sets its child Cells to display inline block once the Grid is wide enough to fit all Cells’ minimum widths.
-Since this isn’t based on viewport-based media queries, the Grid responds to its own width, similar to element queries.
 Once set inline, each Cell’s width is based on the ratio of its own minimum width to the sum of minimum widths per row.
+Once a Cell hits its max-width, the remaining space is distributed to other Cells in the row.
+Since this isn’t based on viewport-based media queries, the Grid responds to its own width, similar to element queries.
+
 
 ## Getting Started
 
@@ -23,7 +26,7 @@ class Demo extends React.Component {
   render () {
     return (
       <Grid gutter={8}>
-        <Cell min={256}>Min 256</Cell>
+        <Cell min={256} max={320}>Min 256 Max 320</Cell>
         <Cell min={768}>Min 768</Cell>
       </Grid>
     )
@@ -43,6 +46,7 @@ React.render(<Demo />, document.querySelector('#demo'))
 
 #### Props
 - `min` - pixel value to set the min-width at which a Cell is displayed inline.
+- `max` - pixel value at which the Cell should not expand. Remaining space is distributed to other Cells.
 - `padding` - sets left and right padding. This is used by the Grid component when the `gutter` prop is set and the Cell has no padding set.
 - `width` - fraction value used by the Grid component to set a width. This can also be set manually when used independently from the Grid component
 - `inline` - boolean value used by the Grid component to display a Cell inline.

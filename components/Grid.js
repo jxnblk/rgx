@@ -26,7 +26,7 @@ var Grid = (function (_React$Component) {
 
     _get(Object.getPrototypeOf(Grid.prototype), 'constructor', this).call(this);
     this.updateWidth = this.updateWidth.bind(this);
-    this.getTotal = this.getTotal.bind(this);
+    this.getMinTotal = this.getMinTotal.bind(this);
     this.state = {
       width: 768
     };
@@ -42,8 +42,8 @@ var Grid = (function (_React$Component) {
       this.setState({ width: width });
     }
   }, {
-    key: 'getTotal',
-    value: function getTotal() {
+    key: 'getMinTotal',
+    value: function getMinTotal() {
       var total = 0;
       var props = this.props;
       _react2['default'].Children.map(this.props.children, function (c, i) {
@@ -71,9 +71,6 @@ var Grid = (function (_React$Component) {
       }
     }
   }, {
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps() {}
-  }, {
     key: 'render',
     value: function render() {
       var props = this.props;
@@ -81,19 +78,53 @@ var Grid = (function (_React$Component) {
       var style = {
         overflow: 'hidden',
         marginLeft: -props.gutter,
-        marginRight: -props.gutter
+        marginRight: -props.gutter,
+
+        position: 'relative'
       };
-      var total = this.getTotal();
+
+      // min width denominator
+      var dmin = this.getMinTotal();
+      // min values of max cells
+      var maxmins = [];
+      // max values of max cells
+      var maxes = [];
+
+      _react2['default'].Children.map(this.props.children, function (c) {
+        if (c.props.max && c.props.min / dmin * state.width > c.props.max) {
+          maxes.push(c.props.max);
+          maxmins.push(c.props.min);
+        }
+      });
+
+      // sum of max cell values
+      var maxSum = maxes.length ? maxes.reduce(function (a, b) {
+        return a + b;
+      }) : 0;
+      // sum of min values for max cells
+      var maxminSum = maxmins.length ? maxmins.reduce(function (a, b) {
+        return a + b;
+      }) : 0;
+      // percent offset from remaining min cell widths
+      var offset = maxSum / state.width / (props.children.length - maxes.length);
+      var denominator = dmin - maxminSum;
+
+      // set child props
       var children = _react2['default'].Children.map(this.props.children, function (c) {
+        var width = c.props.min / denominator - offset;
+        if (c.props.max && c.props.min / dmin * state.width > c.props.max) {
+          width = c.props.max / state.width;
+        }
         var childProps = {
-          width: c.props.min / total,
-          inline: total < state.width
+          width: width,
+          inline: dmin < state.width
         };
         if (!c.props.padding) {
           childProps.padding = props.gutter;
         }
         return _react2['default'].cloneElement(c, childProps);
       });
+
       return _react2['default'].createElement(
         'div',
         { style: style },
@@ -117,5 +148,3 @@ Grid.defaultProps = {
 
 exports['default'] = Grid;
 module.exports = exports['default'];
-
-//this.updateWidth()

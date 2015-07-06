@@ -5,6 +5,7 @@ class Box extends React.Component {
 
   render () {
     let style = {
+      fontSize: 12,
       fontWeight: 'bold',
       textAlign: 'center',
       padding: '8px 4px',

@@ -8,7 +8,7 @@ class Grid extends React.Component {
   constructor () {
     super ()
     this.updateWidth = this.updateWidth.bind(this)
-    this.getTotal = this.getTotal.bind(this)
+    this.getMinTotal = this.getMinTotal.bind(this)
     this.state = {
       width: 768
     }
@@ -20,7 +20,7 @@ class Grid extends React.Component {
     this.setState({ width: width })
   }
 
-  getTotal () {
+  getMinTotal () {
     let total = 0
     let props = this.props
     React.Children.map(this.props.children, function(c, i) {
@@ -46,10 +46,6 @@ class Grid extends React.Component {
     }
   }
 
-  componentWillReceiveProps () {
-    //this.updateWidth()
-  }
-
   render () {
     let props = this.props
     let state = this.state
@@ -57,18 +53,48 @@ class Grid extends React.Component {
       overflow: 'hidden',
       marginLeft: -props.gutter,
       marginRight: -props.gutter,
+
+      position: 'relative'
     }
-    let total = this.getTotal()
+
+    // min width denominator
+    let dmin = this.getMinTotal()
+    // min values of max cells
+    let maxmins = []
+    // max values of max cells
+    let maxes = []
+
+    React.Children.map(this.props.children, function(c) {
+      if (c.props.max && c.props.min / dmin * state.width > c.props.max) {
+        maxes.push(c.props.max)
+        maxmins.push(c.props.min)
+      }
+    })
+
+    // sum of max cell values
+    let maxSum = maxes.length ? maxes.reduce(function(a, b) { return a + b }) : 0
+    // sum of min values for max cells
+    let maxminSum = maxmins.length ? maxmins.reduce(function(a, b) { return a + b }) : 0
+    // percent offset from remaining min cell widths
+    let offset = (maxSum / state.width) / (props.children.length - maxes.length)
+    let denominator = dmin - maxminSum
+
+    // set child props
     let children = React.Children.map(this.props.children, function(c) {
+      let width = c.props.min / denominator - offset
+      if (c.props.max && c.props.min / dmin * state.width > c.props.max) {
+        width = c.props.max / state.width
+      }
       let childProps = {
-        width: c.props.min / total,
-        inline: total < state.width
+        width: width,
+        inline: dmin < state.width
       }
       if (!c.props.padding) {
         childProps.padding = props.gutter
       }
       return React.cloneElement(c, childProps)
     })
+
     return (
       <div style={style}>
         {children}
