@@ -39,8 +39,6 @@ class App extends React.Component {
 
     return (
       <div>
-        <Dev />
-        {/*
         <Header {...props} />
         <Social {...props} />
         <ModularScaleDemo {...state} />
@@ -48,9 +46,9 @@ class App extends React.Component {
         <NestedGrid {...props} {...state} />
         <RatiosDemo {...props} {...state} />
         <CellDemo />
+        <Dev />
         <Readme />
         <Footer {...props} />
-        */}
       </div>
     )
   }
