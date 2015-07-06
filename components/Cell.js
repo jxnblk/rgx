@@ -40,9 +40,25 @@ var Cell = (function (_React$Component) {
         paddingRight: props.padding,
         position: 'relative'
       };
+
+      var abs = {
+        fontSize: 12,
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        color: 'blue'
+      };
       return _react2['default'].createElement(
         'div',
         { style: style },
+        _react2['default'].createElement(
+          'code',
+          { style: abs },
+          props.min,
+          '/',
+          props.max,
+          (props.width * props.gridWidth).toFixed(1)
+        ),
         this.props.children
       );
     }

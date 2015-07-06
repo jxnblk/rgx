@@ -14,8 +14,20 @@ class Cell extends React.Component {
       paddingRight: props.padding,
       position: 'relative'
     }
+
+    let abs = {
+      fontSize: 12,
+      position: 'absolute',
+      bottom: 0,
+      left: 0,
+      color: 'blue'
+    }
     return (
       <div style={style}>
+        <code style={abs}>
+          {props.min}/{props.max}
+          {(props.width * props.gridWidth).toFixed(1)}
+        </code>
         {this.props.children}
       </div>
     )

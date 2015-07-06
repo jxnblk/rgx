@@ -26,7 +26,8 @@ var Grid = (function (_React$Component) {
 
     _get(Object.getPrototypeOf(Grid.prototype), 'constructor', this).call(this);
     this.updateWidth = this.updateWidth.bind(this);
-    this.getTotal = this.getTotal.bind(this);
+    this.getMinTotal = this.getMinTotal.bind(this);
+    this.getMaxTotal = this.getMaxTotal.bind(this);
     this.state = {
       width: 768
     };
@@ -42,8 +43,8 @@ var Grid = (function (_React$Component) {
       this.setState({ width: width });
     }
   }, {
-    key: 'getTotal',
-    value: function getTotal() {
+    key: 'getMinTotal',
+    value: function getMinTotal() {
       var total = 0;
       var props = this.props;
       _react2['default'].Children.map(this.props.children, function (c, i) {
@@ -52,6 +53,22 @@ var Grid = (function (_React$Component) {
           min = props.min;
         }
         total += min;
+      });
+      return total;
+    }
+  }, {
+    key: 'getMaxTotal',
+    value: function getMaxTotal() {
+      var tmin = this.getMinTotal();
+      var total = 0;
+      var props = this.props;
+      var state = this.state;
+      _react2['default'].Children.map(this.props.children, function (c, i) {
+        var max = 0;
+        if (c.props.max && c.props.min / tmin * state.width > c.props.max) {
+          max = c.props.max;
+        }
+        total += max;
       });
       return total;
     }
@@ -85,35 +102,69 @@ var Grid = (function (_React$Component) {
 
         position: 'relative'
       };
-      var total = this.getTotal();
+      var tmin = this.getMinTotal();
+      var tmax = this.getMaxTotal();
       var offset = 0;
+      var toff = 0;
+      var nmax = 0;
+
       _react2['default'].Children.map(this.props.children, function (c) {
-        if (c.props.max && c.props.min / total * state.width > c.props.max) {
+        if (c.props.max && c.props.min / tmin * state.width > c.props.max) {
+          nmax++;
           var max = c.props.max;
           var min = c.props.min;
           var w = state.width;
 
-          offset += (total - min) / (1 - max / w) - total;
+          // Works for situations with just one max Cell
+          //offset -= (((tmin - min) / (1 - max / w)) - tmin + offset)
+          //offset += ((tmin - min) / (1 - (max / w) - ((tmax - max) / w))) - tmin
+
+          //offset -= ( ((tmin - min) / (1 - (max / w) + ((tmax - max) / w))) - tmin)
+
+          // Test
+          //let test = (max/w) + ((tmin - min) / (tmin - offset))
+          var maxes = max / w + (tmax - max) / w;
+          var leftover = 1 - maxes;
+          //console.log('TEST', offset.toFixed(2), test.toFixed(2), Math.round(test * 10000) / 10000 === 1)
+          console.log('MAXES', maxes.toFixed(2));
+          console.log('LEFTOVER', leftover.toFixed(2));
+          toff += min;
+          offset += max / w;
         }
       });
+
       var children = _react2['default'].Children.map(this.props.children, function (c) {
-        var width = c.props.min / (total + offset);
-        if (c.props.max && c.props.min / total * state.width > c.props.max) {
+        var width = c.props.min / (tmin - toff) - offset / (props.children.length - nmax);
+        console.log('width', width);
+        if (c.props.max && c.props.min / tmin * state.width > c.props.max) {
           width = c.props.max / state.width;
         }
         var childProps = {
           width: width,
           gridWidth: state.width,
-          inline: total < state.width
+          tmin: tmin - offset,
+          inline: tmin < state.width
         };
         if (!c.props.padding) {
           childProps.padding = props.gutter;
         }
         return _react2['default'].cloneElement(c, childProps);
       });
+
+      var abs = {
+        fontSize: 12,
+        position: 'absolute',
+        right: 0,
+        color: 'red'
+      };
       return _react2['default'].createElement(
         'div',
         { style: style },
+        _react2['default'].createElement(
+          'code',
+          { style: abs },
+          state.width
+        ),
         children
       );
     }
