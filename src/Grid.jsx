@@ -1,5 +1,6 @@
 
 import React from 'react'
+import _ from 'lodash'
 
 let win = typeof window !== 'undefined' ? window : false
 
@@ -36,13 +37,22 @@ class Grid extends React.Component {
   componentDidMount () {
     this.updateWidth()
     if (win) {
-      win.addEventListener('resize', this.updateWidth)
+      this.throttledUpdateWidth = _.throttle(this.updateWidth, this.props.throttleResize)
+      win.addEventListener('resize', this.throttledUpdateWidth)
     }
   }
 
   componentDidUnmount () {
     if (win) {
-      win.removeEventListener('resize', this.updateWidth)
+      win.removeEventListener('resize', this.throttledUpdateWidth)
+    }
+  }
+
+  componentDidUpdate (prevProps) {
+    if (win && prevProps.throttleResize !== this.props.throttleResize) {
+      win.removeEventListener('resize', this.throttledUpdateWidth)
+      this.throttledUpdateWidth = _.throttle(this.updateWidth, this.props.throttleResize)
+      win.addEventListener('resize', this.throttledUpdateWidth)
     }
   }
 
@@ -107,11 +117,13 @@ class Grid extends React.Component {
 Grid.propTypes = {
   min: React.PropTypes.number,
   gutter: React.PropTypes.number,
+  throttleResize: React.PropTypes.number,
 }
 
 Grid.defaultProps = {
   min: 640,
-  gutter: 0
+  gutter: 0,
+  throttleResize: 200
 }
 
 export default Grid
