@@ -1,7 +1,11 @@
 
+var webpack = require('webpack')
+
 module.exports = {
 
-  entry: './docs/entry.js',
+  entry: [
+    './docs/entry.js'
+  ],
 
   output: {
     filename: 'bundle.js',
@@ -11,11 +15,22 @@ module.exports = {
 
   module: {
     loaders: [
-      { test: /(\.js$|\.jsx?$)/, exclude: /node_modules/, loader: 'babel-loader' },
-      { test: /\.json/, loader: 'json-loader' },
-      { test: /\.md/, loader: 'html-loader!markdown-loader' },
-      { test: /\.css$/, loader: 'style-loader!css-loader!cssnext-loader' }
+      {
+        test: /(\.js$|\.jsx?$)/,
+        exclude: /node_modules/,
+        loaders: [
+          'react-hot',
+          'babel'
+        ]
+      },
+      { test: /\.json/, loader: 'json' },
+      { test: /\.md/, loader: 'html!markdown-loader' },
+      { test: /\.css$/, loader: 'style!css!cssnext' }
     ]
+  },
+
+  resolve: {
+    extensions: ['', '.js', '.jsx']
   },
 
   cssnext: {
