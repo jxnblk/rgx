@@ -41,7 +41,7 @@ class Grid extends React.Component {
     }
   }
 
-  componentDidUnmount () {
+  componentWillUnmount () {
     if (win) {
       this.stopListeningForResize()
     }
