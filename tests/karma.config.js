@@ -1,7 +1,7 @@
 
 module.exports = function (config) {
   config.set({
-    browsers: [ 'Chrome' ],
+    browsers: [ 'Firefox' ],
 
     files: [
       'index.js'
