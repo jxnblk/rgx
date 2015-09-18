@@ -11,7 +11,6 @@ Once set inline, each Cell’s width is based on the ratio of its own minimum wi
 Once a Cell hits its max-width, the remaining space is distributed to other Cells in the row.
 Since this isn’t based on viewport-based media queries, the Grid responds to its own width, similar to element queries.
 
-
 ## Getting Started
 
 ```bash
