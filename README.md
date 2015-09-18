@@ -2,6 +2,8 @@
 
 React grid system – constraint-based responsive grid with no CSS and no media queries.
 
+[![Build Status](https://travis-ci.org/jxnblk/rgx.svg?branch=master)](https://travis-ci.org/jxnblk/rgx)
+
 ## About
 
 Rgx is an experimental, responsive grid system based on <b>minimum and maximum widths</b> and designed for content-out layout.

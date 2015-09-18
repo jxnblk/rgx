@@ -9,7 +9,7 @@
     "dev": "webpack-dev-server --progress --colors --config webpack.dev.config.js",
     "docs": "webpack -p --progress --colors",
     "start": "npm run dev",
-    "test": "./node_modules/.bin/karma start tests/karma.config.js"
+    "test": "./node_modules/.bin/karma start tests/karma.config.js --browsers Firefox --single-run"
   },
   "author": "Brent Jackson",
   "license": "MIT",
@@ -38,6 +38,7 @@
     "karma-chai-plugins": "^0.6.0",
     "karma-chrome-launcher": "^0.2.0",
     "karma-cli": "^0.1.0",
+    "karma-firefox-launcher": "^0.1.6",
     "karma-mocha": "^0.2.0",
     "karma-webpack": "^1.7.0",
     "lodash": "^3.10.0",
