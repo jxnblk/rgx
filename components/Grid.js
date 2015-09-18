@@ -18,6 +18,8 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _lodash = require('lodash');
+
 var win = typeof window !== 'undefined' ? window : false;
 
 var Grid = (function (_React$Component) {
@@ -45,13 +47,16 @@ var Grid = (function (_React$Component) {
     key: 'getMinTotal',
     value: function getMinTotal() {
       var total = 0;
-      var props = this.props;
-      _react2['default'].Children.map(this.props.children, function (c, i) {
-        var min = c.props.min || false;
-        if (!min) {
-          min = props.min;
+      var _props = this.props;
+      var children = _props.children;
+      var min = _props.min;
+
+      _react2['default'].Children.map(children, function (child, i) {
+        var childMin = child.props.min || false;
+        if (!childMin) {
+          childMin = min;
         }
-        total += min;
+        total += childMin;
       });
       return total;
     }
@@ -60,26 +65,47 @@ var Grid = (function (_React$Component) {
     value: function componentDidMount() {
       this.updateWidth();
       if (win) {
-        win.addEventListener('resize', this.updateWidth);
+        this.startListeningForResize();
       }
     }
   }, {
     key: 'componentDidUnmount',
     value: function componentDidUnmount() {
       if (win) {
-        win.removeEventListener('resize', this.updateWidth);
+        this.stopListeningForResize();
       }
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(prevProps) {
+      if (win && prevProps.throttleResize !== this.props.throttleResize) {
+        this.stopListeningForResize();
+        this.startListeningForResize();
+      }
+    }
+  }, {
+    key: 'startListeningForResize',
+    value: function startListeningForResize() {
+      this.throttledUpdateWidth = (0, _lodash.throttle)(this.updateWidth, this.props.throttleResize);
+      win.addEventListener('resize', this.throttledUpdateWidth);
+    }
+  }, {
+    key: 'stopListeningForResize',
+    value: function stopListeningForResize() {
+      win.removeEventListener('resize', this.throttledUpdateWidth);
     }
   }, {
     key: 'render',
     value: function render() {
-      var props = this.props;
-      var state = this.state;
+      var _props2 = this.props;
+      var children = _props2.children;
+      var gutter = _props2.gutter;
+      var width = this.state.width;
+
       var style = {
         overflow: 'hidden',
-        marginLeft: -props.gutter,
-        marginRight: -props.gutter,
-
+        marginLeft: -gutter,
+        marginRight: -gutter,
         position: 'relative'
       };
 
@@ -90,10 +116,10 @@ var Grid = (function (_React$Component) {
       // max values of max cells
       var maxes = [];
 
-      _react2['default'].Children.map(this.props.children, function (c) {
-        if (c.props.max && c.props.min / dmin * state.width > c.props.max) {
-          maxes.push(c.props.max);
-          maxmins.push(c.props.min);
+      _react2['default'].Children.map(children, function (child) {
+        if (child.props.max && child.props.min / dmin * width > child.props.max) {
+          maxes.push(child.props.max);
+          maxmins.push(child.props.min);
         }
       });
 
@@ -106,29 +132,29 @@ var Grid = (function (_React$Component) {
         return a + b;
       }) : 0;
       // percent offset from remaining min cell widths
-      var offset = maxSum / state.width / (props.children.length - maxes.length);
+      var offset = maxSum / width / (children.length - maxes.length);
       var denominator = dmin - maxminSum;
 
       // set child props
-      var children = _react2['default'].Children.map(this.props.children, function (c) {
-        var width = c.props.min / denominator - offset;
-        if (c.props.max && c.props.min / dmin * state.width > c.props.max) {
-          width = c.props.max / state.width;
+      var modifiedChildren = _react2['default'].Children.map(children, function (child) {
+        var childWidth = child.props.min / denominator - offset;
+        if (child.props.max && child.props.min / dmin * width > child.props.max) {
+          childWidth = child.props.max / width;
         }
         var childProps = {
-          width: width,
-          inline: dmin < state.width
+          width: childWidth,
+          inline: dmin < width
         };
-        if (!c.props.padding) {
-          childProps.padding = props.gutter;
+        if (!child.props.padding) {
+          childProps.padding = gutter;
         }
-        return _react2['default'].cloneElement(c, childProps);
+        return _react2['default'].cloneElement(child, childProps);
       });
 
       return _react2['default'].createElement(
         'div',
         { style: style },
-        children
+        modifiedChildren
       );
     }
   }]);
@@ -138,12 +164,14 @@ var Grid = (function (_React$Component) {
 
 Grid.propTypes = {
   min: _react2['default'].PropTypes.number,
-  gutter: _react2['default'].PropTypes.number
+  gutter: _react2['default'].PropTypes.number,
+  throttleResize: _react2['default'].PropTypes.number
 };
 
 Grid.defaultProps = {
   min: 640,
-  gutter: 0
+  gutter: 0,
+  throttleResize: 200
 };
 
 exports['default'] = Grid;

@@ -2,7 +2,7 @@
 import React from 'react'
 import { throttle } from 'lodash'
 
-let win = typeof window !== 'undefined' ? window : false
+const win = typeof window !== 'undefined' ? window : false
 
 class Grid extends React.Component {
 
@@ -16,20 +16,20 @@ class Grid extends React.Component {
   }
 
   updateWidth () {
-    let el = React.findDOMNode(this)
-    let width = el.offsetWidth
-    this.setState({ width: width })
+    const el = React.findDOMNode(this)
+    const width = el.offsetWidth
+    this.setState({ width })
   }
 
   getMinTotal () {
     let total = 0
-    let props = this.props
-    React.Children.map(this.props.children, function(c, i) {
-      let min = c.props.min || false
-      if (!min) {
-        min = props.min
+    const { children, min } = this.props
+    React.Children.map(children, (child, i) => {
+      let childMin = child.props.min || false
+      if (!childMin) {
+        childMin = min
       }
-      total += min
+      total += childMin
     })
     return total
   }
@@ -64,57 +64,56 @@ class Grid extends React.Component {
   }
 
   render () {
-    let props = this.props
-    let state = this.state
-    let style = {
+    const { children, gutter } = this.props
+    const { width } = this.state
+    const style = {
       overflow: 'hidden',
-      marginLeft: -props.gutter,
-      marginRight: -props.gutter,
-
+      marginLeft: -gutter,
+      marginRight: -gutter,
       position: 'relative'
     }
 
     // min width denominator
-    let dmin = this.getMinTotal()
+    const dmin = this.getMinTotal()
     // min values of max cells
     let maxmins = []
     // max values of max cells
     let maxes = []
 
-    React.Children.map(this.props.children, function(c) {
-      if (c.props.max && c.props.min / dmin * state.width > c.props.max) {
-        maxes.push(c.props.max)
-        maxmins.push(c.props.min)
+    React.Children.map(children, (child) => {
+      if (child.props.max && child.props.min / dmin * width > child.props.max) {
+        maxes.push(child.props.max)
+        maxmins.push(child.props.min)
       }
     })
 
     // sum of max cell values
-    let maxSum = maxes.length ? maxes.reduce(function(a, b) { return a + b }) : 0
+    const maxSum = maxes.length ? maxes.reduce((a, b) => { return a + b }) : 0
     // sum of min values for max cells
-    let maxminSum = maxmins.length ? maxmins.reduce(function(a, b) { return a + b }) : 0
+    const maxminSum = maxmins.length ? maxmins.reduce((a, b) => { return a + b }) : 0
     // percent offset from remaining min cell widths
-    let offset = (maxSum / state.width) / (props.children.length - maxes.length)
-    let denominator = dmin - maxminSum
+    const offset = (maxSum / width) / (children.length - maxes.length)
+    const denominator = dmin - maxminSum
 
     // set child props
-    let children = React.Children.map(this.props.children, function(c) {
-      let width = c.props.min / denominator - offset
-      if (c.props.max && c.props.min / dmin * state.width > c.props.max) {
-        width = c.props.max / state.width
+    const modifiedChildren = React.Children.map(children, (child) => {
+      let childWidth = child.props.min / denominator - offset
+      if (child.props.max && child.props.min / dmin * width > child.props.max) {
+        childWidth = child.props.max / width
       }
       let childProps = {
-        width: width,
-        inline: dmin < state.width
+        width: childWidth,
+        inline: dmin < width
       }
-      if (!c.props.padding) {
-        childProps.padding = props.gutter
+      if (!child.props.padding) {
+        childProps.padding = gutter
       }
-      return React.cloneElement(c, childProps)
+      return React.cloneElement(child, childProps)
     })
 
     return (
       <div style={style}>
-        {children}
+        {modifiedChildren}
       </div>
     )
   }
