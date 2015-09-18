@@ -16,7 +16,7 @@ class Cell extends React.Component {
     }
 
     return (
-      <div ref='cell' style={style}>
+      <div ref='root' style={style}>
         {this.props.children}
       </div>
     )

@@ -1,9 +1,8 @@
 
-import React from 'react/addons'
+import React from 'react'
+import TestUtils from 'react-addons-test-utils'
 import expect from 'expect'
 import Cell from '../src/Cell'
-
-const { TestUtils } = React.addons
 
 describe('Cell', () => {
 
@@ -25,7 +24,7 @@ describe('Cell', () => {
   })
 
   it('should be properly styled', () => {
-    const style = cell.refs.cell.getDOMNode().style
+    const style = cell.refs.root.style
     expect(style.boxSizing).toEqual('border-box')
     expect(style.position).toEqual('relative')
     expect(style.paddingLeft).toEqual('16px')

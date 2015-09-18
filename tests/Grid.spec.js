@@ -1,10 +1,9 @@
 
-import React from 'react/addons'
+import React from 'react'
+import TestUtils from 'react-addons-test-utils'
 import expect from 'expect'
 import Grid from '../src/Grid'
 import Cell from '../src/Cell'
-
-const { TestUtils } = React.addons
 
 describe('Grid', () => {
 
