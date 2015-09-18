@@ -1,7 +1,7 @@
 
 import React from 'react'
 import md from '../README.md'
-import Section from './Section.jsx'
+import Section from './Section'
 
 class Readme extends React.Component {
 

@@ -1,8 +1,8 @@
 
 import React from 'react'
-import { Grid, Cell } from '..'
-import Section from './Section.jsx'
-import Box from './Box.jsx'
+import { Grid, Cell } from '../src'
+import Section from './Section'
+import Box from './Box'
 
 class NestedGrid extends React.Component {
 

@@ -1,7 +1,7 @@
 
 import React from 'react'
 import { Range } from 'rebass'
-import { Grid, Cell } from '..'
+import { Grid, Cell } from '../src'
 
 class Controls extends React.Component {
 

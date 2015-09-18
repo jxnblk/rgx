@@ -1,9 +1,9 @@
 
 import React from 'react'
 import ms from 'simple-modular-scale'
-import { Grid, Cell } from '..'
-import Section from './Section.jsx'
-import GridDemo from './GridDemo.jsx'
+import { Grid, Cell } from '../src'
+import Section from './Section'
+import GridDemo from './GridDemo'
 
 class RatiosDemo extends React.Component {
 

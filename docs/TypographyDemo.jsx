@@ -1,8 +1,8 @@
 
 import React from 'react'
 import ms from 'simple-modular-scale'
-import { Grid, Cell } from '..'
-import Section from './Section.jsx'
+import { Grid, Cell } from '../src'
+import Section from './Section'
 
 class TypographyDemo extends React.Component {
 

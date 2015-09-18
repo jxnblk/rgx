@@ -1,6 +1,6 @@
 
 import React from 'react'
-import Section from './Section.jsx'
+import Section from './Section'
 
 class Intro extends React.Component {
 

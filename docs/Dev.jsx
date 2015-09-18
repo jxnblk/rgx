@@ -1,7 +1,7 @@
 
 import React from 'react'
-import { Grid, Cell } from '..'
-import Box from './Box.jsx'
+import { Grid, Cell } from '../src'
+import Box from './Box'
 
 class Dev extends React.Component {
 

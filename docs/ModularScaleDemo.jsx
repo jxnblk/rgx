@@ -1,9 +1,9 @@
 
 import React from 'react'
 import ms from 'simple-modular-scale'
-import { Grid, Cell } from '..'
-import GridDemo from './GridDemo.jsx'
-import Section from './Section.jsx'
+import { Grid, Cell } from '../src'
+import GridDemo from './GridDemo'
+import Section from './Section'
 
 class ModularScaleDemo extends React.Component {
 
@@ -12,7 +12,7 @@ class ModularScaleDemo extends React.Component {
     let scale = ms({
       base: 4 * props.base,
       ratios: [3/2, 4/3],
-      length: 8 
+      length: 8
     })
 
     let g1 = []
