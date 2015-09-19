@@ -2,7 +2,7 @@
   "name": "rgx",
   "version": "0.2.1",
   "description": "React grid system – constraint-based responsive grid with no CSS and no media queries",
-  "main": "components/index.js",
+  "main": "lib/index.js",
   "scripts": {
     "babel": "babel src --out-dir lib",
     "prepublish": "npm run babel",
