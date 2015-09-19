@@ -69,8 +69,8 @@ var Grid = (function (_React$Component) {
       }
     }
   }, {
-    key: 'componentDidUnmount',
-    value: function componentDidUnmount() {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
       if (win) {
         this.stopListeningForResize();
       }

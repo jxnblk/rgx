@@ -43,7 +43,7 @@ var Cell = (function (_React$Component) {
 
       return _react2['default'].createElement(
         'div',
-        { style: style },
+        { ref: 'cell', style: style },
         this.props.children
       );
     }
