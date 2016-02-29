@@ -97,7 +97,7 @@ class Grid extends React.Component {
     // sum of min values for max cells
     const maxminSum = maxmins.length ? maxmins.reduce((a, b) => { return a + b }) : 0
     // percent offset from remaining min cell widths
-    const offset = (maxSum / width) / (children.length - maxes.length)
+    const offset = (maxSum / width) / ((children ? children.length : 0) - maxes.length)
     const denominator = dmin - maxminSum
 
     // set child props
