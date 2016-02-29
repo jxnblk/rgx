@@ -1,5 +1,5 @@
 
-require('babel/register')()
+require('babel-register')()
 
 var _ = require('lodash')
 var config = require('./webpack.config.js')

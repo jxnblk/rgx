@@ -21,7 +21,7 @@ class Grid extends React.Component {
   }
 
   updateWidth () {
-    const el = React.findDOMNode(this)
+    const el = this.refs.root
     const width = el.offsetWidth
     this.setState({ width })
   }
@@ -117,7 +117,7 @@ class Grid extends React.Component {
     })
 
     return (
-      <div style={style}>
+      <div ref='root' style={style}>
         {modifiedChildren}
       </div>
     )
