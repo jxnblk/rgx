@@ -1,9 +1,4 @@
 
-import Grid from './Grid'
-import Cell from './Cell'
-
-export default {
-  Grid,
-  Cell
-}
+export { default as Grid } from './Grid'
+export { default as Cell } from './Cell'
 
