@@ -9,7 +9,8 @@
     "docs": "webpack -p --progress --colors",
     "start": "npm run dev",
     "mocha": "mocha test --compilers js:babel-register",
-    "karma": "./node_modules/.bin/karma start test/karma.config.js --browsers Firefox",
+    "karma:watch": "karma start test/karma.config.js --no-single-run",
+    "karma": "./node_modules/.bin/karma start test/karma.config.js",
     "test": "npm run mocha && npm run karma"
   },
   "author": "Brent Jackson",
