@@ -1,7 +1,10 @@
 
 module.exports = function (config) {
   config.set({
-    browsers: [ 'Chrome', 'Firefox' ],
+    browsers: [
+      'Chrome',
+      'Firefox'
+    ],
 
     files: [
       'index.js'
@@ -14,6 +17,7 @@ module.exports = function (config) {
       'karma-firefox-launcher',
       'karma-chai',
       'karma-mocha',
+      'karma-mocha-reporter',
       'karma-webpack',
     ],
 
@@ -22,7 +26,9 @@ module.exports = function (config) {
         'webpack'
       ]
     },
-    reporters: [ 'dots' ],
+    reporters: [
+      'mocha'
+    ],
     singleRun: true,
 
     webpack: {
