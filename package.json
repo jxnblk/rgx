@@ -8,7 +8,9 @@
     "dev": "webpack-dev-server --progress --colors --config webpack.dev.config.js",
     "docs": "webpack -p --progress --colors",
     "start": "npm run dev",
-    "test": "./node_modules/.bin/karma start tests/karma.config.js --browsers Firefox"
+    "mocha": "mocha test --compilers js:babel-register",
+    "karma": "./node_modules/.bin/karma start test/karma.config.js --browsers Firefox",
+    "test": "npm run mocha && npm run karma"
   },
   "author": "Brent Jackson",
   "license": "MIT",
@@ -27,6 +29,7 @@
     "babel-preset-es2015": "^6.5.0",
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "^6.5.0",
+    "babel-register": "^6.5.2",
     "basscss-color-input-range": "^1.0.0",
     "basscss-input-range": "^1.1.5",
     "blk": "^3.1.0",
@@ -43,6 +46,7 @@
     "karma-cli": "^0.1.0",
     "karma-firefox-launcher": "^0.1.6",
     "karma-mocha": "^0.2.0",
+    "karma-mocha-reporter": "^1.2.3",
     "karma-webpack": "^1.7.0",
     "lodash": "^3.10.0",
     "markdown-loader": "^0.1.3",
@@ -50,13 +54,18 @@
     "mocha": "^2.3.2",
     "node-libs-browser": "^0.5.2",
     "raw-loader": "^0.5.1",
-    "react": "^0.13.3",
+    "react": "^0.14.7",
+    "react-addons-test-utils": "^0.14.7",
+    "react-dom": "^0.14.7",
     "react-hot-loader": "^1.3.0",
     "rebass": "^0.1.3",
     "simple-modular-scale": "^1.0.2",
     "style-loader": "^0.12.3",
     "webpack": "^1.10.1",
     "webpack-dev-server": "^1.10.1"
+  },
+  "peerDependencies": {
+    "react": "^0.14.0"
   },
   "repository": {
     "type": "git",
