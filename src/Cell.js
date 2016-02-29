@@ -1,44 +1,43 @@
 
 import React from 'react'
 
+/**
+ * Child component of Grid that displays inline when
+ * there is enough space in the container
+ */
+
 class Cell extends React.Component {
 
   render () {
-    let props = this.props
-    let style = {
+    const { inline, width, padding, children } = this.props
+    const style = {
       boxSizing: 'border-box',
-      display: props.inline ? 'inline-block' : 'block',
-      width: props.inline ? props.width * 100 + '%' : '100%',
+      display: inline ? 'inline-block' : 'block',
+      width: inline ? `${width * 100}%` : '100%',
       verticalAlign: 'top',
-      paddingLeft: props.padding,
-      paddingRight: props.padding,
+      paddingLeft: padding,
+      paddingRight: padding,
       position: 'relative'
     }
 
     return (
       <div ref='cell' style={style}>
-        {this.props.children}
+        {children}
       </div>
     )
   }
 }
 
 Cell.propTypes = {
+  /** Min-width to display inline */
   min: React.PropTypes.number,
+  /** Max-width for Cell */
   max: React.PropTypes.number,
-  /*
-  max: function(props, name) {
-    if (typeof props[name] === 'undefined') {
-      return false
-    } else if (typeof props[name] !== 'number') {
-      return new Error('max should be a number');
-    } else if (props[name] > props.min) {
-      return new Error('max should be greater than min');
-    }
-  },
-  */
+  /** Width of cell when inline is true - value should be 0–1 */
   width: React.PropTypes.number,
+  /** Left and right padding for creating gutters */
   padding: React.PropTypes.number,
+  /** Sets display inline-block and activates width prop */
   inline: React.PropTypes.bool,
 }
 

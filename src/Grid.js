@@ -4,6 +4,11 @@ import { throttle } from 'lodash'
 
 const win = typeof window !== 'undefined' ? window : false
 
+/**
+ * Parent component for Cell that calculates available
+ * width for setting Cells inline.
+ */
+
 class Grid extends React.Component {
 
   constructor () {
@@ -121,8 +126,11 @@ class Grid extends React.Component {
 }
 
 Grid.propTypes = {
+  /** Sets a default min prop on child Cell components */
   min: React.PropTypes.number,
+  /** Sets negative left and right margins to compensate for Cell padding prop */
   gutter: React.PropTypes.number,
+  /** Milliseconds for throttling window resize listener */
   throttleResize: React.PropTypes.number,
 }
 
