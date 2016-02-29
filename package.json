@@ -1,6 +1,6 @@
 {
   "name": "rgx",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "React grid system – constraint-based responsive grid with no CSS and no media queries",
   "main": "dist/index.js",
   "scripts": {
