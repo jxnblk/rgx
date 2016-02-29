@@ -4,22 +4,47 @@ import TestUtils from 'react-addons-test-utils'
 import expect from 'expect'
 import Cell from '../src/Cell'
 
+const renderer = TestUtils.createRenderer()
+
 describe('Cell', () => {
   let cell
 
-  it('should render')
+  describe('shallow tests', () => {
+    beforeEach(() => {
+      renderer.render(<Cell />)
+      cell = renderer.getRenderOutput()
+    })
 
-  context('browser tests', () => {
+    it('should render', () => {
+      expect(cell.type).toEqual('div')
+    })
+
+    it('should default to 100% width', () => {
+      expect(cell.props.style.width).toEqual('100%')
+    })
+
+    it('should have no default padding', () => {
+      expect(cell.props.style.paddingLeft).toEqual(0)
+      expect(cell.props.style.paddingRight).toEqual(0)
+    })
+
+    it('should not be inline by default', () => {
+      expect(cell.props.inline).toNotExist()
+    })
+
+    it('should not have a default max', () => {
+      expect(cell.props.max).toNotExist()
+    })
+  })
+
+  describe('browser tests', () => {
     if (typeof document === 'undefined') {
       return false
     }
 
     beforeEach(() => {
-      const props = {
-        padding: 16
-      }
       cell = TestUtils.renderIntoDocument(
-        <Cell {...props}>
+        <Cell padding={16}>
           Cell
         </Cell>
       )
