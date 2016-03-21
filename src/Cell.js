@@ -9,11 +9,12 @@ import React from 'react'
 class Cell extends React.Component {
 
   render () {
-    const { inline, width, padding, children } = this.props
+    const { inline, width, padding, children, max } = this.props
     const style = {
       boxSizing: 'border-box',
       display: inline ? 'inline-block' : 'block',
       width: inline ? `${width * 100}%` : '100%',
+      maxWidth: `${max}px`,
       verticalAlign: 'top',
       paddingLeft: padding,
       paddingRight: padding,
